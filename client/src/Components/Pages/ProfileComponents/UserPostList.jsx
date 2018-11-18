@@ -26,7 +26,7 @@ class UserPostList extends PureComponent {
       );
     }
 
-    console.log(posts);
+    console.log(this.props.userPosts);
 
     return (
       <div className="user-post-list">
