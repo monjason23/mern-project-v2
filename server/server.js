@@ -15,12 +15,14 @@ var port = process.env.PORT || 4800;
 
 var mongoose = require("./db/mongoose");
 
+console.log("--", require.main.filename);
+
 //Config
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "client/building")));
+  app.use(express.static(path.join(__dirname, "../client/building")));
 
   app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, "client/building", "index.html"));
+    res.sendFile(path.join(__dirname, "../client/building", "index.html"));
   });
 }
 
