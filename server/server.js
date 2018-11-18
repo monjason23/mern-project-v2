@@ -1,4 +1,5 @@
-var app = require("express")();
+var express = require("express");
+var app = express();
 
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
@@ -14,7 +15,13 @@ var port = process.env.PORT || 4800;
 var mongoose = require("./db/mongoose");
 
 //Config
-require("./config/production")(app);
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.resolve(__dirname, "client/build")));
+
+  app.get("*", function(req, res) {
+    res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
+  });
+}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
