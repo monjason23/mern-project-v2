@@ -31,11 +31,11 @@ class UserPostList extends PureComponent {
     return (
       <div className="user-post-list">
         <br />
-        {posts.map(post => (
+        {/* {posts.map(post => (
           <Link key={post._id} to={`${this.props.match.url}/posts/${post._id}`}>
             <UserPost postData={post} />
           </Link>
-        ))}
+        ))} */}
       </div>
     );
   }
