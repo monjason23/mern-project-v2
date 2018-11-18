@@ -24,14 +24,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/build")));
-
-  app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, "../client/build", "index.html"));
-  });
-}
-
 app.use(passport.initialize());
 
 //Passport
@@ -44,6 +36,14 @@ app.get("/", function(req, res) {
 
 app.use("/user", passport.authenticate("jwt", { session: false }), userRoute);
 app.use("/auth", authRoute);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+
+  app.get("*", function(req, res) {
+    res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+  });
+}
 
 app.listen(port, function() {
   console.log("Server running at port " + port);
