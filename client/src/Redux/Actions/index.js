@@ -13,6 +13,7 @@ function authLogin(username, password) {
       .then(userData => {
         setTimeout(() => {
           dispatch(authLoginSuccessful(userData));
+          dispatch(authGetUserInfo());
           dispatch(authLoggedIn());
         }, 1000);
       })
