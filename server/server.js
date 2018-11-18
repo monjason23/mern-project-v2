@@ -17,10 +17,10 @@ var mongoose = require("./db/mongoose");
 
 //Config
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join("buildiing")));
+  app.use(express.static(path.join(__dirname, "client/build")));
 
   app.get("*", function(req, res) {
-    res.sendFile(path.join("buildiing", "index.html"));
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
   });
 }
 
