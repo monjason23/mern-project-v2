@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join("build")));
 
   app.get("*", function(req, res) {
-    res.sendFile(path.join("build", "index.html"));
+    res.sendFile(path.join("buildiing", "index.html"));
   });
 }
 
