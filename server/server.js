@@ -1,0 +1,39 @@
+var app = require("express")();
+
+var bodyParser = require("body-parser");
+var cookieParser = require("cookie-parser");
+var passport = require("passport");
+var cors = require("cors");
+
+var authRoute = require("./routes/auth");
+var userRoute = require("./routes/user");
+
+var port = process.env.PORT || 4800;
+
+//Database
+var mongoose = require("./db/mongoose");
+
+//Config
+require("./config/production")(app);
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(cors());
+
+app.use(passport.initialize());
+
+//Passport
+require("./passport.config");
+
+//Routes
+app.get("/", function(req, res) {
+  res.send("You are now connected!");
+});
+
+app.use("/user", passport.authenticate("jwt", { session: false }), userRoute);
+app.use("/auth", authRoute);
+
+app.listen(port, function() {
+  console.log("Server running at port " + port);
+});
