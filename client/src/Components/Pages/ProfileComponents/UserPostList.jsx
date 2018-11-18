@@ -17,10 +17,18 @@ class UserPostList extends PureComponent {
       return <div>Loading..</div>;
     }
 
-    console.log(posts);
+    if (posts.length === 0) {
+      return (
+        <div>
+          <br />
+          No Posts yet
+        </div>
+      );
+    }
 
     return (
       <div className="user-post-list">
+        <br />
         {posts.map(post => (
           <Link key={post._id} to={`${this.props.match.url}/posts/${post._id}`}>
             <UserPost postData={post} />
